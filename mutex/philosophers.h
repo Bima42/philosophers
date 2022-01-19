@@ -37,8 +37,8 @@ int	ft_strlen(char *str);
 
 //Init
 void	init_data(t_data *data, int argc, char **argv);
-int		init_mutex(t_data *data)
-int		init_philo(t_data *data)
+int		init_mutex(t_data *data);
+int		init_philo(t_data *data);
 int		ft_atoi(const char *nptr);
 
 #endif

@@ -2,10 +2,8 @@
 
 int	main(int argc, char **argv)
 {
-	pthread_t	philo[4];
 	t_data		data;
 	long		nb;
-	int			ret;
 
 	nb = 0;
 	if (!check_arg(argc, argv, &data))
