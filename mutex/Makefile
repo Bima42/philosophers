@@ -1,7 +1,7 @@
 CC		=	gcc
 FLAGS	=	-Wall -Wextra -Werror -g -I.
 
-SRCS	=	main.c init.c error.c
+SRCS	=	main.c init.c error.c resolve.c tools.c
 NAME	=	philo
 
 OBJS	=	$(SRCS:.c=.o)
