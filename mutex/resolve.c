@@ -28,7 +28,7 @@ void	*routine(void *philo_addr)
 	while (!(data->dead))
 	{
 		philo_lunch(philo, data);
-		if (!(data->end))
+		if (data->end)
 			break ;
 		print_message(data, philo->id, "is sleeping");
 		sleep_timer(data->time_to_sleep, data);
@@ -58,7 +58,7 @@ void	death_checker(t_data *data, t_philo *philo)
 		if (data->dead)
 			break ;
 		i = 0;
-		while (data->meal_to_eat != -1 && i < data->nb_philo && philo[i].count_meal == data->meal_to_eat)
+		while (data->meal_to_eat != -1 && i < data->nb_philo && philo[i].count_meal >= data->meal_to_eat)
 			i++;
 		if (i == data->nb_philo)
 			data->end = 1;
