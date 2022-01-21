@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:23:01 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 15:23:37 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/01/21 23:27:27 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	child_process(t_philo *philo)
 
 	data = philo->data;
 	philo->death_timer = timestamp();
-	pthread_create(&(philo->death_checker), NULL, death_checker, &philo);
+	pthread_create(&(philo->death_checker), NULL, death_checker, philo);
 	if (philo->id % 2)
 		usleep(15000);
 	while (philo->count_meal != data->meal_to_eat)
