@@ -16,6 +16,9 @@ void	init_data(t_data *data, int argc, char **argv)
 
 int	init_sem(t_data *data)
 {
+	sem_unlink("forks");
+	sem_unlink("message");
+	sem_unlink("is_eating");
 	data->forks = sem_open("forks", O_CREAT, S_IRWXU, data->nb_philo);
 	data->message = sem_open("message", O_CREAT, S_IRWXU, 1);
 	data->is_eating = sem_open("is_eating", O_CREAT, S_IRWXU, 1);

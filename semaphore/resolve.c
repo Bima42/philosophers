@@ -35,7 +35,6 @@ void	child_process(t_philo *philo)
 		print_message(data, philo->id, "is thinking");
 	}
 	pthread_join(philo->death_checker, NULL);
-	if (data)
 	exit(0);
 }
 
