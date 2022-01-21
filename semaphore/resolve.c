@@ -22,7 +22,7 @@ void	child_process(t_philo *philo)
 
 	data = philo->data;
 	philo->death_timer = timestamp();
-	pthread_create(&(philo->death_checker), NULL, death_checker, philo);
+	pthread_create(&(philo->death_checker), NULL, death_checker, &philo);
 	if (philo->id % 2)
 		usleep(15000);
 	while (philo->count_meal != data->meal_to_eat)
@@ -58,6 +58,7 @@ void	*death_checker(void *philo_addr)
 		sem_post(data->is_eating);
 		if (data->dead)
 			break ;
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -90,7 +91,7 @@ int	resolve(t_data *data)
 	{
 		philo[i].process_id = fork();
 		if (philo[i].process_id == 0)
-			child_process(&(philo[i]));
+			child_process(&philo[i]);
 	}
 	i = -1;
 	while (++i < data->nb_philo)
