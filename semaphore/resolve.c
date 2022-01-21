@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:23:01 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 23:27:27 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/01/21 23:50:53 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*death_checker(void *philo_addr)
 			exit(1);
 		}
 		sem_post(data->is_eating);
-		if (data->dead)
+		if (data->dead || philo->count_meal == data->meal_to_eat)
 			break ;
 		usleep(100);
 	}
