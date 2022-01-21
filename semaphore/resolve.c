@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   resolve.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/21 15:23:01 by tpauvret          #+#    #+#             */
+/*   Updated: 2022/01/21 15:23:37 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	philo_lunch(t_philo *philo, t_data *data)
@@ -80,8 +92,8 @@ void	exit_solver(t_data *data)
 
 int	resolve(t_data *data)
 {
-	int	i;
-	int	ret;
+	int		i;
+	int		ret;
 	t_philo	*philo;
 
 	i = -1;
