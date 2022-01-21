@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:46:26 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 16:15:19 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:44:27 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	exit_solver(t_data *data, t_philo *philo)
 	int	i;
 
 	i = -1;
-	while (++i < data->nb_philo)
+	while (++i < data->nb_philo && data->nb_philo > 1)
 		pthread_join(philo[i].thread_id, NULL);
 	i = -1;
 	while (++i < data->nb_philo)
