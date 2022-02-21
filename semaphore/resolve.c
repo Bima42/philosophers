@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:23:01 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/22 00:04:27 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:02:36 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	child_process(t_philo *philo)
 		print_message(data, philo->id, "is thinking");
 	}
 	pthread_join(philo->death_checker, NULL);
+	if (data->dead)
+		exit(1);
 	exit(0);
 }
 
@@ -68,7 +70,7 @@ void	*death_checker(void *philo_addr)
 			exit(1);
 		}
 		sem_post(data->is_eating);
-		if (data->dead || philo->count_meal == data->meal_to_eat)
+		if (data->dead || philo->count_meal >= data->meal_to_eat)
 			break ;
 		usleep(200);
 	}
@@ -78,10 +80,21 @@ void	*death_checker(void *philo_addr)
 void	exit_solver(t_data *data)
 {
 	int	i;
+	int ret;
 
-	i = -1;
-	while (++i < data->nb_philo)
-		kill(data->philo[i].id, 15);
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		waitpid(-1, &ret, 0);
+		if (ret != 0)
+		{
+			i = -1;
+			while (++i < data->nb_philo)
+				kill(data->philo[i].id, 15);
+			break ;
+		}
+		i++;
+	}
 	sem_close(data->forks);
 	sem_close(data->message);
 	sem_close(data->is_eating);
@@ -93,7 +106,6 @@ void	exit_solver(t_data *data)
 int	resolve(t_data *data)
 {
 	int		i;
-	int		ret;
 	t_philo	*philo;
 
 	i = -1;
@@ -102,15 +114,10 @@ int	resolve(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		philo[i].process_id = fork();
+		if (philo[i].process_id < 0)
+			return (0);
 		if (philo[i].process_id == 0)
 			child_process(&philo[i]);
-	}
-	i = -1;
-	while (++i < data->nb_philo)
-	{
-		waitpid(-1, &ret, 0);
-		if (ret != 0)
-			break ;
 	}
 	exit_solver(data);
 	return (1);
