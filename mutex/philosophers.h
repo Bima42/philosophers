@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:45:32 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 16:15:41 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:17:09 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int			ft_strlen(char *str);
 void		init_data(t_data *data, int argc, char **argv);
 int			init_mutex(t_data *data);
 int			init_philo(t_data *data);
+int			free_mutex(int i, int ret, t_data *data);
 int			ft_atoi(const char *nptr);
 
 //Tools

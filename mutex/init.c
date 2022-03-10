@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:43:36 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 15:43:38 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:16:55 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	init_data(t_data *data, int argc, char **argv)
 	data->end = 0;
 }
 
+int	free_mutex(int i, int ret, t_data *data)
+{
+	if (i == 0)
+		return (ret);
+	else
+		while (i != -1)
+			pthread_mutex_destroy(&(data->forks[i--]));
+	return (ret);
+}
+
 int	init_mutex(t_data *data)
 {
 	int	i;
@@ -34,7 +44,7 @@ int	init_mutex(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL))
-			return (0);
+			return (free_mutex(i, 0, data));
 	}
 	if (pthread_mutex_init(&(data->message), NULL))
 		return (0);
