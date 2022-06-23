@@ -6,7 +6,7 @@
 /*   By: tpauvret <tpauvret@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 15:46:26 by tpauvret          #+#    #+#             */
-/*   Updated: 2022/01/21 16:44:27 by tpauvret         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:02:36 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int	resolve(t_data *data)
 	while (++i < data->nb_philo)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, routine, &(philo[i])))
-			return (0);
+			return (free_mutex(data->nb_philo, 0, data));
+		pthread_mutex_destroy(&(data->message));
+		pthread_mutex_destroy(&(data->is_eating));
 		philo[i].death_timer = timestamp();
 	}
 	death_checker(data, data->philo, 0);
